@@ -94,19 +94,19 @@ export class ExampleControllerService {
 
     /**
      * @param id 
-     * @param exampleRequest 
+     * @param ExampleRequest 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public example(id: number, exampleRequest: ExampleRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext, transferCache?: boolean}): Observable<ExampleResponse>;
-    public example(id: number, exampleRequest: ExampleRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<ExampleResponse>>;
-    public example(id: number, exampleRequest: ExampleRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<ExampleResponse>>;
-    public example(id: number, exampleRequest: ExampleRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+    public example(id: number, ExampleRequest: ExampleRequest, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext, transferCache?: boolean}): Observable<ExampleResponse>;
+    public example(id: number, ExampleRequest: ExampleRequest, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<ExampleResponse>>;
+    public example(id: number, ExampleRequest: ExampleRequest, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<ExampleResponse>>;
+    public example(id: number, ExampleRequest: ExampleRequest, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext, transferCache?: boolean}): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling example.');
         }
-        if (exampleRequest === null || exampleRequest === undefined) {
-            throw new Error('Required parameter exampleRequest was null or undefined when calling example.');
+        if (ExampleRequest === null || ExampleRequest === undefined) {
+            throw new Error('Required parameter ExampleRequest was null or undefined when calling example.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -164,7 +164,7 @@ export class ExampleControllerService {
         return this.httpClient.request<ExampleResponse>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: exampleRequest,
+                body: ExampleRequest,
                 params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
