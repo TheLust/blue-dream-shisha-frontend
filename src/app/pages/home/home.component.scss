@@ -1,6 +1,14 @@
 .slider {
   width: calc(100% - 32px);
   aspect-ratio: 4/5;
+
+  @media (min-width: 768px) {
+    aspect-ratio: 2/1;
+  }
+
+  @media (min-width: 1024px) {
+    aspect-ratio: 3/1;
+  }
   margin: 0 auto;
 
   swiper-container {
