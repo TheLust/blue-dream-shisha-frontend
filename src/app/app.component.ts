@@ -5,6 +5,7 @@ import { MatButton, MatIconButton } from '@angular/material/button';
 import { NgIf, NgOptimizedImage } from '@angular/common';
 import { MatToolbar } from '@angular/material/toolbar';
 import { MatIcon } from '@angular/material/icon';
+import { AuthService, LoginRequest, ModelError } from './api';
 
 @Component({
   selector: 'app-root',
@@ -26,5 +27,22 @@ import { MatIcon } from '@angular/material/icon';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppComponent {
+
+  constructor(public authService: AuthService) {
+  }
+
+  public login() {
+    this.authService.login({
+      username: "gigel",
+      password: "Marcel1@1"
+    }, 'body').subscribe({
+      next: value => {
+        console.log(value);
+      },
+      error: err => {
+        console.log(err.error);
+      }
+    });
+  }
 
 }
