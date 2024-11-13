@@ -1,34 +1,21 @@
 <div class="page-container">
   <div class="slider">
-    <swiper-container style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="mySwiper"
-                      pagination="true" pagination-clickable="true" navigation="true">
-      <swiper-slide lazy="true">
-        <img loading="lazy" ngSrc="https://swiperjs.com/demos/images/nature-1.jpg" alt="" fill=""/>
+    <swiper-container style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff"
+                      class="mySwiper"
+                      pagination="true"
+                      pagination-clickable="true"
+                      navigation="true">
+      <swiper-slide *ngFor="let swiperImageDto of swiperImages"
+                    lazy="true">
+        <img *ngIf="swiperImageDto.file_id && swiperImageDto.index"
+             loading="lazy"
+             [ngSrc]="getImageUrl(swiperImageDto.file_id)"
+             fill=""
+             [alt]="swiperImageDto.file_id">
       </swiper-slide>
-      <swiper-slide lazy="true">
-        <img loading="lazy" ngSrc="https://swiperjs.com/demos/images/nature-2.jpg" alt=""/>
-      </swiper-slide>
-      <swiper-slide lazy="true">
-        <img loading="lazy" ngSrc="https://swiperjs.com/demos/images/nature-3.jpg" alt=""/>
-      </swiper-slide>
-      <swiper-slide lazy="true">
-        <img loading="lazy" ngSrc="https://swiperjs.com/demos/images/nature-4.jpg" alt=""/>
-      </swiper-slide>
-      <swiper-slide lazy="true">
-        <img loading="lazy" ngSrc="https://swiperjs.com/demos/images/nature-5.jpg" alt=""/>
-      </swiper-slide>
-      <swiper-slide lazy="true">
-        <img loading="lazy" ngSrc="https://swiperjs.com/demos/images/nature-6.jpg" alt=""/>
-      </swiper-slide>
-      <swiper-slide lazy="true">
-        <img loading="lazy" ngSrc="https://swiperjs.com/demos/images/nature-7.jpg" alt=""/>
-      </swiper-slide>
-      <swiper-slide lazy="true">
-        <img loading="lazy" ngSrc="https://swiperjs.com/demos/images/nature-8.jpg" alt=""/>
-      </swiper-slide>
-      <swiper-slide lazy="true">
-        <img loading="lazy" ngSrc="https://swiperjs.com/demos/images/nature-9.jpg" alt=""/>
-      </swiper-slide>
+<!--      <swiper-slide lazy="true">-->
+<!--        <img loading="lazy" ngSrc="https://swiperjs.com/demos/images/nature-1.jpg" alt="" fill=""/>-->
+<!--      </swiper-slide>-->
     </swiper-container>
   </div>
 </div>
