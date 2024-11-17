@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  min-height: calc(100vh - 124px); //64px for header 60 for label
+
+  app-loading-spinner {
+    margin: auto;
+
+    .auth-container {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      width: 300px;
+      background-color: var(--mat-select-panel-background-color);
+      border-radius: 20px;
+    }
+
+    .title {
+      text-align: center;
+    }
+  }
+}
+
+::ng-deep .hidden-header {
+  .mat-mdc-tab-header {
+    display: none;
+  }
+}
+

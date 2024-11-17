@@ -1,0 +1,29 @@
+.container {
+  display: inline-flex;
+  border-radius: 10px;
+  padding: 4px 8px;
+  gap: 3px;
+  align-items: stretch;
+
+  .icon-container {
+    display: flex;
+    align-items: center;
+
+    mat-icon {
+      font-size: 1.9em;
+      width: auto;
+      height: auto;
+      color: var(--mdc-filled-text-field-error-focus-label-text-color);
+    }
+  }
+
+  .error-container {
+    display: flex;
+    align-items: center;
+    p {
+      font-size: 0.9em;
+      margin: 0;
+      color: var(--mdc-filled-text-field-error-focus-label-text-color);
+    }
+  }
+}

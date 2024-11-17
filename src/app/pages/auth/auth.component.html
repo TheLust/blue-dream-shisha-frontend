@@ -1,0 +1,15 @@
+<div class="container">
+  <app-loading-spinner [isLoading]="isLoadingLogin || isLoadingRegister">
+    <div class="auth-container">
+      <mat-tab-group class="hidden-header" dynamicHeight="true">
+        <mat-tab label="Sign in">
+          <h6 class="title">{{ 'FE_AUTH_LOGIN_TITLE' | translation }}</h6>
+          <app-login (isLoadingChange)="isLoadingLogin = $event"></app-login>
+        </mat-tab>
+        <mat-tab label="Sign up">
+          <h6 class="title">{{ 'FE_AUTH_REGISTER_TITLE' | translation }}</h6>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </app-loading-spinner>
+</div>

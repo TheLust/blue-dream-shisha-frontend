@@ -1,10 +1,12 @@
-import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, ErrorHandler, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { ApiModule, Configuration, ConfigurationParameters } from './api';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { httpErrorInterceptor } from './interceptor/http-error.interceptor';
+import { BlueDreamShishaErrorHandler } from './error_handler/blue-dream-shisha-error-handler';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -12,8 +14,11 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimationsAsync(),
     provideAnimationsAsync(),
-    importProvidersFrom(HttpClientModule),
-    importProvidersFrom(ApiModule.forRoot(apiConfigFactory))
+    provideHttpClient(
+      withInterceptors([httpErrorInterceptor])
+    ),
+    importProvidersFrom(ApiModule.forRoot(apiConfigFactory)),
+    {provide: ErrorHandler, useClass: BlueDreamShishaErrorHandler}
   ]
 };
 

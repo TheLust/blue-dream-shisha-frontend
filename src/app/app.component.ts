@@ -1,11 +1,11 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatSidenav, MatSidenavContainer, MatSidenavContent } from '@angular/material/sidenav';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { NgIf, NgOptimizedImage } from '@angular/common';
 import { MatToolbar } from '@angular/material/toolbar';
 import { MatIcon } from '@angular/material/icon';
-import { AuthService, LoginRequest, ModelError } from './api';
+import { TranslationService } from './service/translation/translation.service';
 
 @Component({
   selector: 'app-root',
@@ -26,23 +26,11 @@ import { AuthService, LoginRequest, ModelError } from './api';
   styleUrl: './app.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
-  constructor(public authService: AuthService) {
+  constructor(private translationService: TranslationService) { }
+
+  ngOnInit(): void {
+    this.translationService.loadTranslations();
   }
-
-  public login() {
-    this.authService.login({
-      username: "gigel",
-      password: "Marcel1@1"
-    }, 'body').subscribe({
-      next: value => {
-        console.log(value);
-      },
-      error: err => {
-        console.log(err.error);
-      }
-    });
-  }
-
 }

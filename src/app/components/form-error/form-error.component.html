@@ -1,0 +1,9 @@
+<div *ngIf="formErrorCode"
+     class="container">
+  <div class="icon-container">
+    <mat-icon>info_outline</mat-icon>
+  </div>
+  <div class="error-container">
+    <p>{{ formErrorCode | translation }}</p>
+  </div>
+</div>

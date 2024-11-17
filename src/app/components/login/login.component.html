@@ -1,0 +1,26 @@
+<div class="container">
+  <form [formGroup]="formGroup" (ngSubmit)="login()">
+    <app-form-error [formErrorCode]="formErrorCode"/>
+    <mat-form-field>
+      <mat-label>{{ 'FE_LOGIN_FORM_USERNAME_LABEL' | translation }}</mat-label>
+      <input matInput
+             formControlName="username">
+      <mat-icon matSuffix>person</mat-icon>
+      <mat-error>{{ getError('username') | translation }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>{{ 'FE_LOGIN_FORM_PASSWORD_LABEL' | translation }}</mat-label>
+      <input matInput
+             type="password"
+             formControlName="password">
+      <mat-icon matSuffix>lock</mat-icon>
+      <mat-error>{{ getError('password') | translation }}</mat-error>
+    </mat-form-field>
+
+    <button mat-button
+            type="submit">
+      {{ 'FE_LOGIN_FORM_BUTTON_TEXT' | translation }}
+    </button>
+  </form>
+</div>
