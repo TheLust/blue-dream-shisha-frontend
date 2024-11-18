@@ -1,0 +1,26 @@
+.container {
+  max-width: 450px;
+
+  .image-container {
+    width: 70%;
+    margin: 0 auto;
+    img {
+      width: 100%;
+    }
+  }
+
+  .title {
+    p {
+      text-align: center;
+      font-size: 1.1em;
+      font-weight: bold;
+    }
+  }
+
+  .error-description {
+    p {
+      text-align: center;
+      font-size: 1em;
+    }
+  }
+}

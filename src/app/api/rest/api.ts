@@ -1,0 +1,11 @@
+export * from './auth.service';
+import { AuthService } from './auth.service';
+export * from './cms-swiper.service';
+import { CmsSwiperService } from './cms-swiper.service';
+export * from './i18n.service';
+import { I18nService } from './i18n.service';
+export * from './public-i18n.service';
+import { PublicI18nService } from './public-i18n.service';
+export * from './public-swiper.service';
+import { PublicSwiperService } from './public-swiper.service';
+export const APIS = [AuthService, CmsSwiperService, I18nService, PublicI18nService, PublicSwiperService];

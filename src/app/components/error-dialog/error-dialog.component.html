@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="image-container">
+    <img src="/images/unhandled-error.gif" alt="unhandled-error.gif">
+  </div>
+  <div class="title">
+    <p>{{ 'FE_ERROR_DIALOG_TITLE_STATUS' | translation }} {{ data.status }} - {{ 'ERROR_SERVICE_UNAVAILABLE' | translation }}</p>
+  </div>
+  <div *ngIf="descriptionStrategy == 'default'" class="error-description">
+    <p>{{ 'FE_ERROR_DIALOG_DESCRIPTION_DEFAULT' | translation }}</p>
+  </div>
+  <div *ngIf="descriptionStrategy == 'errorCode'" class="error-description">
+    <p>{{ data.errorCode | translation }}</p>
+  </div>
+</div>

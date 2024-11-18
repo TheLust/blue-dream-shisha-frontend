@@ -14,11 +14,15 @@ export class TranslationService {
   constructor(private publicI18nService: PublicI18nService) {
   }
 
-  loadTranslations(): void {
-    this.publicI18nService.getTranslations('en').subscribe({
+  loadTranslationsByPrefixList(prefixList: Array<string>): void {
+    this.publicI18nService.searchTranslationsByPrefixList(
+      'en',
+      {prefix_list: prefixList}
+    ).subscribe({
       next: value => {
         const translationByCode: Map<string, string> = new Map(Object.entries(value));
-        this.translations.next(translationByCode);
+        const updatedTranslations: Map<string, string> = new Map([...translationByCode, ...this.translations.getValue()]);
+        this.translations.next(updatedTranslations);
       }
     });
   }
