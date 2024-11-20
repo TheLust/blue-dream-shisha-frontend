@@ -31,6 +31,6 @@ export class AppComponent implements OnInit {
   constructor(private translationService: TranslationService) { }
 
   ngOnInit(): void {
-    this.translationService.loadTranslationsByPrefixList(['ERROR_', 'FE_ERROR_DIALOG_']);
+    this.translationService.loadTranslationsByPrefixList(['ERROR_', 'FE_ERROR_DIALOG_']).then(() => {});
   }
 }

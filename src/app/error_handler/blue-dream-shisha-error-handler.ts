@@ -20,19 +20,19 @@ export class BlueDreamShishaErrorHandler implements ErrorHandler {
     } else if (error instanceof HandledError) {
       //ignore
     } else if (error instanceof BlueDreamShishaError) {
-      console.error("Handled service error from backend", error.errorResponse)
-      this.showErrorDialog(error.errorResponse);
+      console.error("Unhandled service error from backend", error.errorResponse)
+      this.showErrorDialog(error.errorResponse, error.useDefaultErrorDialog);
     } else {
       console.error(error);
     }
   }
 
-  private showErrorDialog(errorResponse: ErrorResponse): void {
+  private showErrorDialog(errorResponse: ErrorResponse, useDefaultErrorDialog: boolean): void {
     this.dialog.open(ErrorDialogComponent, {
       data: {
         errorCode: errorResponse.error_code,
         status: errorResponse.status,
-        showErrorCodeAsDescription: false
+        showErrorCodeAsDescription: !useDefaultErrorDialog
       } as ErrorDialogData
     })
   }

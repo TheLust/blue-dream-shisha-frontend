@@ -11,6 +11,7 @@ import { MatIcon } from '@angular/material/icon';
 import { TranslationPipe } from '../../service/translation/translation.pipe';
 import { FormErrorComponent } from '../form-error/form-error.component';
 import { LoadingBarComponent } from '../loading-bar/loading-bar.component';
+import { FormErrorHandlingConfig } from '../generic/form/form-error-handling-config';
 
 @Component({
   selector: 'app-login',
@@ -30,10 +31,10 @@ import { LoadingBarComponent } from '../loading-bar/loading-bar.component';
     FormErrorComponent,
     LoadingBarComponent
   ],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  templateUrl: './login-form.component.html',
+  styleUrl: './login-form.component.scss'
 })
-export class LoginComponent extends FormComponent<LoginRequest, AuthResponse> {
+export class LoginFormComponent extends FormComponent<LoginRequest, AuthResponse> {
 
   constructor(private authService: AuthService) {
     super(new FormGroup<any>({
@@ -79,5 +80,14 @@ export class LoginComponent extends FormComponent<LoginRequest, AuthResponse> {
         ])
       ]
     ]);
+  }
+
+  errorHandlingConfig(): FormErrorHandlingConfig {
+    return {
+      minStatus: 400,
+      maxStatus: 499,
+      ignoredErrorCodes: ['ERROR_CHECK'],
+      snackbarErrorCodes: []
+    } as FormErrorHandlingConfig;
   }
 }

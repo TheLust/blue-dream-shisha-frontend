@@ -5,12 +5,18 @@ import { LoadingComponent } from '../loading/loading.component';
 import { AbstractControl, FormGroup, ValidationErrors } from '@angular/forms';
 import { BlueDreamShishaError } from '../../../error/blue-dream-shisha-error';
 import { HandledError } from '../../../error/handled-error';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { FormErrorHandlingConfig } from './form-error-handling-config';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslationService } from '../../../service/translation/translation.service';
 
 @Component({
   template: ''
 })
 export abstract class FormComponent<Request, Response> extends LoadingComponent {
+
+  private _snackBar: MatSnackBar = inject(MatSnackBar);
+  private _translationService: TranslationService = inject(TranslationService);
 
   readonly formGroup: FormGroup;
   public validate: boolean = true;
@@ -81,6 +87,8 @@ export abstract class FormComponent<Request, Response> extends LoadingComponent 
 
   abstract fieldErrorCodeMappings(): Map<string, Map<string, string>> | null;
 
+  abstract errorHandlingConfig(): FormErrorHandlingConfig;
+
   private send(request: Request): Promise<Response> {
     return lastValueFrom(this.fetchData(this.action(request)))
       .catch((error: BlueDreamShishaError) => {
@@ -140,8 +148,42 @@ export abstract class FormComponent<Request, Response> extends LoadingComponent 
   }
 
   private handleError(error: BlueDreamShishaError): void {
+    const config: FormErrorHandlingConfig = this.errorHandlingConfig();
     const errorResponse: ErrorResponse = error.errorResponse;
-    if (errorResponse.status && errorResponse.status >= 400 && errorResponse.status <= 499) {
+
+    if (!errorResponse || !errorResponse.error_code || !errorResponse.status) {
+      throw error;
+    }
+
+    if (config.ignoredErrorCodes.includes(errorResponse.error_code)) {
+      error.useDefaultErrorDialog = true; //TODO: check if we need switch for error dialog specific translation
+      throw error;
+    }
+
+    if (config.snackbarErrorCodes.includes(errorResponse.error_code)) {
+      const translatedError: string | undefined = this._translationService.getTranslation(errorResponse.error_code);
+      if (translatedError) {
+        this._snackBar.open(
+          translatedError,
+          "OK",
+          {
+            duration: 3000,
+            verticalPosition: 'top',
+            horizontalPosition: 'end'
+          }
+        );
+
+        throw new HandledError();
+      } else {
+        throw new Error(
+          "Tried to show snackbar error but could not because could not find translation for " +
+          errorResponse.error_code
+        );
+      }
+    }
+
+
+    if (errorResponse.status >= config.minStatus && errorResponse.status <= config.maxStatus) {
       this.formErrorCode = errorResponse.error_code ? errorResponse.error_code : null;
       throw new HandledError();
     }
